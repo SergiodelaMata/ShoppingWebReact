@@ -2,7 +2,7 @@ import React from 'react'
 
 function Title() {
   return (
-    <div>Title</div>
+    <h1>Buscador de imágenes</h1>
   )
 }
 

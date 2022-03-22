@@ -4,6 +4,7 @@ import JsonFile from './files/test.json';
 
 import bootstrap from 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from './components/Navbar'
+import Title from './components/Title'
 
 export class App extends Component {
   state = {
@@ -30,7 +31,6 @@ export class App extends Component {
 
   getData=()=>{
     const json = JSON.parse(JSON.stringify({JsonFile})).JsonFile;
-    console.log(json.categories);
     this.setState({
       categories: json.categories,
       products: json.products,
@@ -38,11 +38,17 @@ export class App extends Component {
     })
   }
 
+  setPage=(page)=>{
+    this.setState({
+      page: page
+    })
+  }
+
   render(){
     return (
       <div className="App">
-        <Navbar></Navbar>
-        <h1>Buscador de imágenes</h1>
+        <Navbar setPage={this.setPage}></Navbar>
+        <Title></Title>
       </div>
     );
   }
