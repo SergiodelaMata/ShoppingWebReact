@@ -13,6 +13,20 @@ function Navbar() {
               <span className="navbar-toggler-icon"></span>
             </button>
           
+            <div className="collapse navbar-collapse navbar-div" id="navbarSupportedContent">
+              <ul className="navbar-nav me-auto">
+                <li className="nav-item" style={{textAlign:'center'}} >
+                  <a className="nav-link active" href="home.html">Home</a>
+                </li>
+                <li id="newCategory" className="nav-item" style={{textAlign:'center'}}>
+                </li>
+                <li id="newProduct" className="nav-item" style={{textAlign:'center'}}>
+                </li>
+              </ul>
+              <ul id="loginlogout" className="nav navbar-nav flex-row justify-content-center ml-auto">
+                
+              </ul>
+            </div>
         </div>
     </nav>
   )
