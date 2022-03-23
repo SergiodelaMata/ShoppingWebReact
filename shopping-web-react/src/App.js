@@ -9,7 +9,8 @@ import Title from './components/Title'
 export class App extends Component {
   state = {
     user: "",
-    page: "",
+    page: "Home",
+    title: "Encuentre aquí los productos que busca",
     categories: [],
     products: [],
     users: []
@@ -39,8 +40,22 @@ export class App extends Component {
   }
 
   setPage=(page)=>{
+    var title = "";
+    if(page === "Home")
+    {
+      title = "Encuentre aquí los productos que busca";
+    }
+    else if(page === "newCategory")
+    {
+      title = "Introduzca una nueva categoría";
+    }
+    else if(page === "newProduct")
+    {
+      title = "Introduzca un nuevo producto";
+    }
     this.setState({
-      page: page
+      page: page,
+      title: title
     })
   }
 
@@ -48,7 +63,7 @@ export class App extends Component {
     return (
       <div className="App">
         <Navbar setPage={this.setPage}></Navbar>
-        <Title></Title>
+        <Title title={this.state.title}></Title>
       </div>
     );
   }
