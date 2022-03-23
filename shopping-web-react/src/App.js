@@ -5,6 +5,8 @@ import JsonFile from './files/test.json';
 import bootstrap from 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from './components/Navbar'
 import Title from './components/Title'
+import HomeBody from './components/HomeBody';
+import Form from './components/Form'
 
 export class App extends Component {
   state = {
@@ -59,11 +61,33 @@ export class App extends Component {
     })
   }
 
+  contentShow = () => {
+    if(this.state.page === "Home")
+    {
+      return(
+        <React.Fragment>
+          <HomeBody></HomeBody>
+        </React.Fragment>
+      )
+    }
+    else
+    {
+      return(
+        <React.Fragment>
+          <Form></Form>
+        </React.Fragment>
+      )
+    }
+  }
+
   render(){
     return (
       <div className="App">
         <Navbar setPage={this.setPage}></Navbar>
         <Title title={this.state.title}></Title>
+        <React.Fragment>
+            {this.contentShow()}
+        </React.Fragment>
       </div>
     );
   }
