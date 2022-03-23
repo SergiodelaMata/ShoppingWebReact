@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import JsonFile from './files/test.json';
 
-import bootstrap from 'bootstrap/dist/css/bootstrap.min.css'
+import bootstrapCSS from 'bootstrap/dist/css/bootstrap.min.css'
+import bootstrapJS from 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import Navbar from './components/Navbar'
 import Title from './components/Title'
 import HomeBody from './components/HomeBody';
@@ -10,7 +11,8 @@ import Form from './components/Form'
 
 export class App extends Component {
   state = {
-    user: "",
+    userEmail: "",
+    userRole: "",
     page: "Home",
     title: "Encuentre aquí los productos que busca",
     categories: [],
@@ -61,6 +63,20 @@ export class App extends Component {
     })
   }
 
+  removeUser=()=>{
+    this.setState({
+      userEmail: "",
+      userRole: ""
+    })
+  }
+
+  setUser=(userEmail, userRole)=>{
+    this.setState({
+      userEmail: userEmail,
+      userRole: userRole
+    })
+  }
+
   contentShow = () => {
     if(this.state.page === "Home")
     {
@@ -83,7 +99,7 @@ export class App extends Component {
   render(){
     return (
       <div className="App">
-        <Navbar setPage={this.setPage}></Navbar>
+        <Navbar setPage={this.setPage} userEmail={this.state.userEmail} userRole={this.state.userRole} setUser={this.setUser} removeUser={this.removeUser}></Navbar>
         <Title title={this.state.title}></Title>
         <React.Fragment>
             {this.contentShow()}
