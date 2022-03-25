@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
-import DropdownButton from 'react-bootstrap/esm/DropdownButton';
 import Logo from '../img/logo.jpg'
+import FormLogin from './FormLogin';
 
 export default class Navbar extends Component {
+    constructor(props)
+    {
+      super(props);
+      //this.submitData = this.submitData.bind(this);
+    }
+  
 
     obtainPage = namePage => () => {
         this.props.setPage(namePage);
@@ -32,6 +38,10 @@ export default class Navbar extends Component {
         }
     }
 
+    logout = () => {
+        this.props.removeUser();
+    }
+
     statusLogin = () => {
         var userEmail = this.props.userEmail;
         //Si no se ha iniciado sesión, se establece un botón con un menú dropdown para poder iniciar sesión
@@ -39,20 +49,7 @@ export default class Navbar extends Component {
         {
             return(
                 <React.Fragment>
-                    <DropdownButton  align={"start"} id="login" variant='secondary' menuVariant='dark' title='Login'>
-                        <form className='form'>
-                            <div className='form-group container'>
-                                <input id='emailInput' className='form-control form-control-sm' placeholder='Email' type={"text"} required></input>
-                            </div>
-                            <div className='form-group container'>
-                                <input id='passwordInput' className='form-control form-control-sm' placeholder='Contraseña' type={"password"} required></input>
-                            </div>
-                            <div className='form-group container'>
-                                <button className='btn btn-primary btn-block' type='button' style={{marginTop:'1em', width: '100%'}}>Login</button>
-                            </div>
-                        </form>
-                    </DropdownButton>
-                    
+                    <FormLogin userEmail={this.props.userEmail} userRole={this.props.userRole} users={this.props.users} setUser={this.props.setUser}></FormLogin>
                 </React.Fragment>
             )
         }
@@ -62,15 +59,11 @@ export default class Navbar extends Component {
             return(
                 <React.Fragment>
                     <li>
-                        <button id="logout" type="button" className='btn btn-outline-secondary' style={{textAlign:'center'}} onClick={this.logout()}>Logout</button>
+                        <button id="logout" type="button" className='btn btn-outline-secondary' style={{textAlign:'center'}} onClick={this.logout}>Logout</button>
                     </li>
                 </React.Fragment>
             )
         }
-    }
-
-    logout = () => {
-        this.props.removeUser();
     }
 
     render() {

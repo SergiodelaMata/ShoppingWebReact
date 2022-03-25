@@ -4,6 +4,7 @@ import JsonFile from './files/test.json';
 
 import bootstrapCSS from 'bootstrap/dist/css/bootstrap.min.css'
 import bootstrapJS from 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import $ from "jquery"
 import Navbar from './components/Navbar'
 import Title from './components/Title'
 import HomeBody from './components/HomeBody';
@@ -23,24 +24,69 @@ export class App extends Component {
   constructor(props)
   {
     super(props);
-    this.getData = this.getData.bind(this);
+    this.getData = this.getData.bind(this, true);
   }
 
   componentDidMount() {
-    window.addEventListener('load', this.getData);
+    window.addEventListener('load', this.getData, true);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('load', this.getData);
+    window.removeEventListener('load', this.getData, true);
   }
 
   getData=()=>{
-    const json = JSON.parse(JSON.stringify({JsonFile})).JsonFile;
-    this.setState({
-      categories: json.categories,
-      products: json.products,
-      users: json.users
-    })
+    var userEmail = sessionStorage.getItem('email');
+    var userRole = sessionStorage.getItem('role');
+
+    if(userEmail === null || userEmail === undefined || userRole === null || userRole === undefined)
+    {
+      userEmail = "";
+      userRole = "";
+    }
+
+    if( localStorage.categories !== "" && localStorage.categories !== null && localStorage.categories !== undefined
+    && localStorage.products !== "" && localStorage.products !== null && localStorage.products !== undefined
+    && localStorage.users !== "" && localStorage.users !== null && localStorage.users !== undefined)
+    {
+      var categories = JSON.parse(localStorage.categories);
+      var products = JSON.parse(localStorage.products);
+      var users = JSON.parse(localStorage.users);
+
+      if(localStorage.productsInBag === null || localStorage.productsInBag === undefined)
+      {
+          localStorage.setItem("productsInBag", JSON.stringify([]));
+      }
+
+      this.setState({
+        userEmail: userEmail,
+        userRole: userRole,
+        categories: categories,
+        products: products,
+        users: users
+      })
+    }
+    else
+    {
+      const json = JSON.parse(JSON.stringify({JsonFile})).JsonFile;
+      var categories = json.categories;
+      var products = json.products;
+      var users = json.users;
+
+      localStorage.setItem('categories', JSON.stringify(categories));
+      localStorage.setItem('products', JSON.stringify(products));
+      localStorage.setItem('users', JSON.stringify(users));
+
+      localStorage.setItem('productsInBag', JSON.stringify([]));
+
+      this.setState({
+        userEmail: userEmail,
+        userRole: userRole,
+        categories: categories,
+        products: products,
+        users: users
+      })
+    }
   }
 
   setPage=(page)=>{
@@ -71,6 +117,8 @@ export class App extends Component {
   }
 
   setUser=(userEmail, userRole)=>{
+    console.log(userEmail + " " + sessionStorage.email);
+    console.log(userRole + " " + sessionStorage.role);
     this.setState({
       userEmail: userEmail,
       userRole: userRole
@@ -99,7 +147,7 @@ export class App extends Component {
   render(){
     return (
       <div className="App">
-        <Navbar setPage={this.setPage} userEmail={this.state.userEmail} userRole={this.state.userRole} setUser={this.setUser} removeUser={this.removeUser}></Navbar>
+        <Navbar setPage={this.setPage} userEmail={this.state.userEmail} userRole={this.state.userRole} users={this.state.users} setUser={this.setUser} removeUser={this.removeUser}></Navbar>
         <Title title={this.state.title}></Title>
         <React.Fragment>
             {this.contentShow()}
