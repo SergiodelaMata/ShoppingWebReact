@@ -150,7 +150,7 @@ export class App extends Component {
     {
       return(
         <React.Fragment>
-          <Form page={this.state.page} categories={this.state.categories} setCategories={this.setCategories} products={this.state.products} setProducts={this.setProducts}></Form>
+          <Form page={this.state.page} setPage={this.setPage} categories={this.state.categories} setCategories={this.setCategories} products={this.state.products} setProducts={this.setProducts}></Form>
         </React.Fragment>
       )
     }

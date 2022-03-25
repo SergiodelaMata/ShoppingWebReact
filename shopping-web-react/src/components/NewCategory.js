@@ -23,6 +23,7 @@ export default class NewCategory extends Component {
         localStorage.setItem('categories', JSON.stringify(categories));
         alert("La nueva categoría ha sido creada.");
         this.props.setCategories(categories);
+        this.props.setPage("Home");
     }
     //En caso contrario, avisa al usuario de que ya existe
     else

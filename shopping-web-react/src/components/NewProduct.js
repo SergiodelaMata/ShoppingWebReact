@@ -60,12 +60,11 @@ export default class NewProduct extends Component {
                 "image" : image
             }
 
-            console.log(newProduct);
-        
             products.push(newProduct);
             localStorage.setItem('products', JSON.stringify(products));
             alert("El producto ha sido creado e introducido en su respectiva categoría.");
-            this.props.setProduct(products);
+            this.props.setProducts(products);
+            this.props.setPage("Home");
         }
         //En caso contrario, se avisa al usuario de que el producto ya se encontraba disponible
         else
