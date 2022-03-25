@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import DropdownButton from 'react-bootstrap/esm/DropdownButton';
+import "../css/dropdown.css"
+import $ from "jquery"
 
 export default class FormLogin extends Component {
     refEmail = React.createRef();
@@ -8,6 +10,10 @@ export default class FormLogin extends Component {
     {
       super(props);
       this.submitData = this.submitData.bind(this);
+    }
+
+    state = {
+        formFlag: false
     }
 
     loginSubmit = (e) => {
@@ -51,7 +57,7 @@ export default class FormLogin extends Component {
     render() {
         return (
             <DropdownButton  align={"start"} id="login" variant='secondary' menuVariant='dark' title='Login'>
-                <form className='form' onSubmit={this.loginSubmit}>
+                <form id='dropdown-menu' className='form' onSubmit={this.loginSubmit}>
                     <div className='form-group container'>
                         <input ref={this.refEmail} id='emailInput' className='form-control form-control-sm' placeholder='Email' type={"text"} required></input>
                     </div>

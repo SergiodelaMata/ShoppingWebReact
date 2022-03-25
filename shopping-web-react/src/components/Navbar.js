@@ -6,10 +6,8 @@ export default class Navbar extends Component {
     constructor(props)
     {
       super(props);
-      //this.submitData = this.submitData.bind(this);
     }
   
-
     obtainPage = namePage => () => {
         this.props.setPage(namePage);
     }

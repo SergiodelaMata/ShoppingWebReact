@@ -110,6 +110,8 @@ export class App extends Component {
   }
 
   removeUser=()=>{
+    sessionStorage.setItem("email", "");
+    sessionStorage.setItem("role", "");
     this.setState({
       userEmail: "",
       userRole: ""
@@ -117,8 +119,6 @@ export class App extends Component {
   }
 
   setUser=(userEmail, userRole)=>{
-    console.log(userEmail + " " + sessionStorage.email);
-    console.log(userRole + " " + sessionStorage.role);
     this.setState({
       userEmail: userEmail,
       userRole: userRole
