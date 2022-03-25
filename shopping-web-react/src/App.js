@@ -125,6 +125,18 @@ export class App extends Component {
     })
   }
 
+  setCategories=(categories)=>{
+    this.setState({
+      categories: categories
+    })
+  }
+
+  setProducts=(products)=>{
+    this.setState({
+      products: products
+    })
+  }
+
   contentShow = () => {
     if(this.state.page === "Home")
     {
@@ -138,7 +150,7 @@ export class App extends Component {
     {
       return(
         <React.Fragment>
-          <Form page={this.state.page}></Form>
+          <Form page={this.state.page} categories={this.state.categories} setCategories={this.setCategories} products={this.state.products} setProducts={this.setProducts}></Form>
         </React.Fragment>
       )
     }

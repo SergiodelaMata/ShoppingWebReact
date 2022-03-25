@@ -8,7 +8,7 @@ export default class Form extends Component {
     {
       return (
         <React.Fragment>
-          <NewCategory></NewCategory>
+          <NewCategory categories={this.props.categories} setCategories={this.props.setCategories}></NewCategory>
         </React.Fragment>
       )
     }
@@ -16,7 +16,7 @@ export default class Form extends Component {
     {
       return (
         <React.Fragment>
-          <NewProduct></NewProduct>
+          <NewProduct categories={this.props.categories} products={this.props.products} setProducts={this.props.setProducts}></NewProduct>
         </React.Fragment>
       )
     }
