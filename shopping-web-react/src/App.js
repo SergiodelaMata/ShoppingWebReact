@@ -138,7 +138,7 @@ export class App extends Component {
     {
       return(
         <React.Fragment>
-          <Form></Form>
+          <Form page={this.state.page}></Form>
         </React.Fragment>
       )
     }
@@ -147,7 +147,7 @@ export class App extends Component {
   render(){
     return (
       <div className="App">
-        <Navbar setPage={this.setPage} userEmail={this.state.userEmail} userRole={this.state.userRole} users={this.state.users} setUser={this.setUser} removeUser={this.removeUser}></Navbar>
+        <Navbar page={this.state.page} setPage={this.setPage} userEmail={this.state.userEmail} userRole={this.state.userRole} users={this.state.users} setUser={this.setUser} removeUser={this.removeUser}></Navbar>
         <Title title={this.state.title}></Title>
         <React.Fragment>
             {this.contentShow()}

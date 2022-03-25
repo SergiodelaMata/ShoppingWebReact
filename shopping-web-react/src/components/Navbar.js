@@ -12,6 +12,29 @@ export default class Navbar extends Component {
         this.props.setPage(namePage);
     }
 
+    initSection = () => {
+        if(this.props.page === "Home")
+        {
+            return(
+                <React.Fragment>
+                    <li className="nav-item" style={{textAlign:'center'}} >
+                        <a className="nav-link active" onClick={this.obtainPage('Home')}>Home</a>
+                    </li>
+                </React.Fragment>
+            )
+        }
+        else
+        {
+            return(
+                <React.Fragment>
+                    <li className="nav-item" style={{textAlign:'center'}} >
+                        <a className="nav-link" onClick={this.obtainPage('Home')}>Home</a>
+                    </li>
+                </React.Fragment>
+            )
+        }
+    }
+
     adminSections = () => {
         var userEmail = this.props.userEmail;
         var userRole = this.props.userRole;
@@ -19,16 +42,45 @@ export default class Navbar extends Component {
         //Se comprueba si se ha iniciado sesión y el usuario que ha iniciado tiene rol de administrador para añadir las secciones de adminstrador a la barra de navegación
         if(userEmail !== "" && userEmail !== null && userEmail !== undefined && userRole === "admin")
         {
-            return (
-                <React.Fragment>
-                    <li id="newCategory" className="nav-item" style={{textAlign:'center'}}>
-                        <a id="newCategoryA" className="nav-link" onClick={this.obtainPage('newCategory')}>Nueva categoría</a>
-                    </li>
-                    <li id="newProduct" className="nav-item" style={{textAlign:'center'}}>
-                        <a id="newProductA" className="nav-link" onClick={this.obtainPage('newCategory')}>Nuevo producto</a>
-                    </li>
-                </React.Fragment>
-            )
+            if(this.props.page === "newCategory")
+            {
+                return (
+                    <React.Fragment>
+                        <li id="newCategory" className="nav-item" style={{textAlign:'center'}}>
+                            <a id="newCategoryA" className="nav-link active" onClick={this.obtainPage('newCategory')}>Nueva categoría</a>
+                        </li>
+                        <li id="newProduct" className="nav-item" style={{textAlign:'center'}}>
+                            <a id="newProductA" className="nav-link" onClick={this.obtainPage('newProduct')}>Nuevo producto</a>
+                        </li>
+                    </React.Fragment>
+                )
+            }
+            else if(this.props.page === "newProduct")
+            {
+                return (
+                    <React.Fragment>
+                        <li id="newCategory" className="nav-item" style={{textAlign:'center'}}>
+                            <a id="newCategoryA" className="nav-link" onClick={this.obtainPage('newCategory')}>Nueva categoría</a>
+                        </li>
+                        <li id="newProduct" className="nav-item" style={{textAlign:'center'}}>
+                            <a id="newProductA" className="nav-link active" onClick={this.obtainPage('newProduct')}>Nuevo producto</a>
+                        </li>
+                    </React.Fragment>
+                )
+            }
+            else
+            {
+                return (
+                    <React.Fragment>
+                        <li id="newCategory" className="nav-item" style={{textAlign:'center'}}>
+                            <a id="newCategoryA" className="nav-link" onClick={this.obtainPage('newCategory')}>Nueva categoría</a>
+                        </li>
+                        <li id="newProduct" className="nav-item" style={{textAlign:'center'}}>
+                            <a id="newProductA" className="nav-link" onClick={this.obtainPage('newProduct')}>Nuevo producto</a>
+                        </li>
+                    </React.Fragment>
+                )
+            }
         }
         else
         {
@@ -78,9 +130,9 @@ export default class Navbar extends Component {
             
                 <div className="collapse navbar-collapse navbar-div" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto">
-                        <li className="nav-item" style={{textAlign:'center'}} >
-                        <a className="nav-link" onClick={this.obtainPage('Home')}>Home</a>
-                        </li>
+                        <React.Fragment>
+                            {this.initSection()}
+                        </React.Fragment>
                         <React.Fragment>
                             {this.adminSections()}
                         </React.Fragment>
