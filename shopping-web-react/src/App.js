@@ -142,7 +142,7 @@ export class App extends Component {
     {
       return(
         <React.Fragment>
-          <HomeBody></HomeBody>
+          <HomeBody categories={this.state.categories} setCategories={this.setCategories} products={this.state.products} setProducts={this.setProducts}></HomeBody>
         </React.Fragment>
       )
     }
