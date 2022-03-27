@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import JsonFile from './files/test.json';
 
-import bootstrapCSS from 'bootstrap/dist/css/bootstrap.min.css'
-import bootstrapJS from 'bootstrap/dist/js/bootstrap.bundle.min.js'
-import $ from "jquery"
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import Navbar from './components/Navbar'
 import Title from './components/Title'
 import HomeBody from './components/HomeBody';
@@ -18,7 +17,8 @@ export class App extends Component {
     title: "Encuentre aquí los productos que busca",
     categories: [],
     products: [],
-    users: []
+    users: [],
+    productsInBag: []
   }
 
   constructor(props)
@@ -53,6 +53,8 @@ export class App extends Component {
       var products = JSON.parse(localStorage.products);
       var users = JSON.parse(localStorage.users);
 
+      var productsInBag = JSON.parse(localStorage.productsInBag);
+
       if(localStorage.productsInBag === null || localStorage.productsInBag === undefined)
       {
           localStorage.setItem("productsInBag", JSON.stringify([]));
@@ -63,7 +65,8 @@ export class App extends Component {
         userRole: userRole,
         categories: categories,
         products: products,
-        users: users
+        users: users,
+        productsInBag: productsInBag
       })
     }
     else
@@ -84,7 +87,8 @@ export class App extends Component {
         userRole: userRole,
         categories: categories,
         products: products,
-        users: users
+        users: users,
+        productsInBag: []
       })
     }
   }
@@ -137,12 +141,18 @@ export class App extends Component {
     })
   }
 
+  setProductsInBag=(productsInBag)=>{
+    this.setState({
+      productsInBag: productsInBag
+    })
+  }
+
   contentShow = () => {
     if(this.state.page === "Home")
     {
       return(
         <React.Fragment>
-          <HomeBody categories={this.state.categories} setCategories={this.setCategories} products={this.state.products} setProducts={this.setProducts}></HomeBody>
+          <HomeBody categories={this.state.categories} setCategories={this.setCategories} products={this.state.products} setProducts={this.setProducts} productsInBag={this.state.productsInBag} setProductsInBag={this.setProductsInBag}></HomeBody>
         </React.Fragment>
       )
     }

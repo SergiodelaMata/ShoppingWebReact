@@ -9,7 +9,7 @@ export default class CategoriesList extends Component {
       <React.Fragment>
         {
           categories.map(category => (
-            <Category key={category.idCategory} category={category} products={this.props.products} setProducts={this.props.setProducts}/>
+            <Category key={category.idCategory} category={category} products={this.props.products} setProducts={this.props.setProducts} productsInBag={this.props.productsInBag} setProductsInBag={this.props.setProductsInBag}/>
           ))
         }
       </React.Fragment>
@@ -23,11 +23,11 @@ export default class CategoriesList extends Component {
               <h3>Productos disponibles clasificados por categoría:</h3>
           </div>
           <div id="categories" className="accordion" style={{marginTop: '1em', marginBottom: '1em'}}>
-              <React.Fragment>
-                {
-                  this.buildCatalog()
-                }
-              </React.Fragment>
+            <React.Fragment>
+              {
+                this.buildCatalog()
+              }
+            </React.Fragment>
           </div>
       </div>
     )

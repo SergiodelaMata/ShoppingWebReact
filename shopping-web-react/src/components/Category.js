@@ -18,7 +18,7 @@ export default class Category extends Component {
       <React.Fragment>
         {
           listProducts.map(product => (
-            <Product key={product.codeProduct} product={product} products={this.props.products} setProducts={this.props.setProducts}/>
+            <Product key={product.codeProduct} product={product} products={this.props.products} setProducts={this.props.setProducts} productsInBag={this.props.productsInBag} setProductsInBag={this.props.setProductsInBag}/>
           ))
         }
       </React.Fragment>
