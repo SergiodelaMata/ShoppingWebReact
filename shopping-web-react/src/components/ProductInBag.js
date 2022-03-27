@@ -170,6 +170,72 @@ export default class ProductInBag extends Component {
 }
   }
 
+  removeProduct = () => {
+    var productsInBag = this.props.productsInBag;
+    var products = this.props.products;
+
+    var codeProduct = this.refMinusCodeProduct.current.getAttribute("codeProduct");
+    const productNotInBag = products.filter(product => product.codeProduct === codeProduct)[0];
+    const indexNotInBag = products.findIndex(product => product.codeProduct === codeProduct);
+    const productInBag = productsInBag.filter(product => product.codeProduct === codeProduct)[0];
+    const index = productsInBag.findIndex(product => product.codeProduct === codeProduct);
+
+    //Comprueba si solo existe una unidad del producto y en tal caso lo saca de la cesta
+    if(parseInt(productInBag.numUnits) === 1)
+    {
+      productsInBag = productsInBag.filter(function(element){
+        return element != productInBag;
+      })
+      localStorage.setItem("productsInBag", JSON.stringify(productsInBag));
+      this.props.setProductsInBag(productsInBag);
+      var buttonPlus = ReactDOM.findDOMNode(this.refPlusCodeProduct.current);
+      buttonPlus.removeAttribute("disabled");
+
+      const productUpdated = {
+        "codeProduct": products[indexNotInBag].codeProduct,
+        "idCategory": products[indexNotInBag].idCategory,
+        "titleProduct": products[indexNotInBag].titleProduct,
+        "description": products[indexNotInBag].description,
+        "price": products[indexNotInBag].price,
+        "numUnits": products[indexNotInBag].numUnits + 1,
+        "image": products[indexNotInBag].image
+      }
+      products[indexNotInBag] = productUpdated;
+      localStorage.setItem("products", JSON.stringify(products));
+      this.props.setProducts(products);
+    }
+    //En caso contrario elimina una unidad del producto de la cesta
+    else
+    {
+      const productUpdated = {
+        "codeProduct": productsInBag[index].codeProduct,
+        "titleProduct": productsInBag[index].titleProduct,
+        "description": productsInBag[index].description,
+        "price": productsInBag[index].price,
+        "numUnits": productsInBag[index].numUnits - 1,
+        "image": productsInBag[index].image
+      }
+      productsInBag[index] = productUpdated;
+      localStorage.setItem("productsInBag", JSON.stringify(productsInBag));
+      this.props.setProductsInBag(productsInBag);
+      var buttonPlus = ReactDOM.findDOMNode(this.refPlusCodeProduct.current);
+      buttonPlus.removeAttribute("disabled");
+
+      const productNotBagUpdated = {
+        "codeProduct": products[indexNotInBag].codeProduct,
+        "idCategory": products[indexNotInBag].idCategory,
+        "titleProduct": products[indexNotInBag].titleProduct,
+        "description": products[indexNotInBag].description,
+        "price": products[indexNotInBag].price,
+        "numUnits": products[indexNotInBag].numUnits + 1,
+        "image": products[indexNotInBag].image
+      }
+      products[indexNotInBag] = productNotBagUpdated;
+      localStorage.setItem("products", JSON.stringify(products));
+      this.props.setProducts(products);
+    }
+  }
+
   configLimitUnitsAdd = () => {
     var productInBag = this.props.productInBag;
     var products = this.props.products;
