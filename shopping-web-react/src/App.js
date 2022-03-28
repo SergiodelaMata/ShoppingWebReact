@@ -22,7 +22,6 @@ export class App extends Component {
     users: [],
     productsInBag: [],
     overlay: false,
-    cleanUp: 0,
     totalPrice: 0
   }
 
@@ -172,23 +171,11 @@ export class App extends Component {
     })
   }
 
-  setCleanUp=(cleanUp)=>{
-    this.setState({
-      cleanUp: cleanUp
-    })
-  }
-
   setTotalPrice=(totalPrice)=>{
     this.setState({
       totalPrice:totalPrice
     })
   }
-
-  removeUnits = () => {
-    localStorage.setItem('productsInBag', JSON.stringify([]));
-    this.setProductsInBag([]);
-  }
-
 
   showPopUp = () => {
     var totalPrice = this.state.totalPrice;
@@ -200,19 +187,7 @@ export class App extends Component {
       return(
         <React.Fragment>
           <div className="overlay" id="overlay" style={{display:'flex'}}>
-            <Popup productsInBag={this.state.productsInBag} setProductsInBag={this.setProductsInBag} totalPrice={totalPrice} setOverlay={this.setOverlay} setCleanUp={this.setCleanUp}></Popup>
-          </div>
-        </React.Fragment>
-      )
-    }
-    else if(overlay !== true && cleanUp > 0)
-    {
-      this.removeUnits();
-      this.setCleanUp(0);
-      return(
-        <React.Fragment>
-          <div className="overlay" id="overlay" style={{display:'none'}}>
-            <Popup productsInBag={this.state.productsInBag} setProductsInBag={this.setProductsInBag} totalPrice={totalPrice} setOverlay={this.setOverlay} setCleanUp={this.setCleanUp}></Popup>
+            <Popup productsInBag={this.state.productsInBag} setProductsInBag={this.setProductsInBag} totalPrice={totalPrice} setOverlay={this.setOverlay}></Popup>
           </div>
         </React.Fragment>
       )
@@ -222,7 +197,7 @@ export class App extends Component {
       return(
         <React.Fragment>
           <div className="overlay" id="overlay" style={{display:'none'}}>
-            <Popup productsInBag={this.state.productsInBag} setProductsInBag={this.setProductsInBag} totalPrice={totalPrice} setOverlay={this.setOverlay} setCleanUp={this.setCleanUp}></Popup>
+            <Popup productsInBag={this.state.productsInBag} setProductsInBag={this.setProductsInBag} totalPrice={totalPrice} setOverlay={this.setOverlay}></Popup>
           </div>
         </React.Fragment>
       )

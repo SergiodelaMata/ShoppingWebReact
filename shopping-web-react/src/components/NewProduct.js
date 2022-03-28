@@ -52,7 +52,7 @@ export default class NewProduct extends Component {
         {
             const newProduct = {
                 "codeProduct" : codeProduct,
-                "idCategory" : idCategory,
+                "idCategory" : parseInt(idCategory),
                 "titleProduct" : titleProduct,
                 "description" : description,
                 "price" : parseFloat(price),

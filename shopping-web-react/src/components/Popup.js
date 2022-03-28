@@ -4,7 +4,8 @@ import "../css/popup.css"
 export default class Popup extends Component {
     setFinish = () => {
         this.props.setOverlay(false);
-        this.props.setCleanUp(1);
+        localStorage.setItem('productsInBag', JSON.stringify([]));
+        this.props.setProductsInBag([]);
     }
 
     render() {
