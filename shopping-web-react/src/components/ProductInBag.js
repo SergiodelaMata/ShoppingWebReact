@@ -101,7 +101,6 @@ export default class ProductInBag extends Component {
             //En el caso de no cumplirse los casos anteriores, simplemente se deshabilita el botón para añadir a la cesta
             else
             {
-              var buttonPlus = ReactDOM.findDOMNode(this.refPlusCodeProduct.current);
               buttonPlus.disabled = true;
             }
         }
@@ -165,9 +164,8 @@ export default class ProductInBag extends Component {
     }
     else
     {
-      var buttonPlus = ReactDOM.findDOMNode(this.refPlusCodeProduct.current);
       buttonPlus.disabled = true;
-}
+    }
   }
 
   removeProduct = () => {
@@ -175,20 +173,20 @@ export default class ProductInBag extends Component {
     var products = this.props.products;
 
     var codeProduct = this.refMinusCodeProduct.current.getAttribute("codeProduct");
-    const productNotInBag = products.filter(product => product.codeProduct === codeProduct)[0];
     const indexNotInBag = products.findIndex(product => product.codeProduct === codeProduct);
     const productInBag = productsInBag.filter(product => product.codeProduct === codeProduct)[0];
     const index = productsInBag.findIndex(product => product.codeProduct === codeProduct);
+
+    var buttonPlus = ReactDOM.findDOMNode(this.refPlusCodeProduct.current);
 
     //Comprueba si solo existe una unidad del producto y en tal caso lo saca de la cesta
     if(parseInt(productInBag.numUnits) === 1)
     {
       productsInBag = productsInBag.filter(function(element){
-        return element != productInBag;
+        return element !== productInBag;
       })
       localStorage.setItem("productsInBag", JSON.stringify(productsInBag));
       this.props.setProductsInBag(productsInBag);
-      var buttonPlus = ReactDOM.findDOMNode(this.refPlusCodeProduct.current);
       buttonPlus.removeAttribute("disabled");
 
       const productUpdated = {
@@ -218,7 +216,6 @@ export default class ProductInBag extends Component {
       productsInBag[index] = productUpdated;
       localStorage.setItem("productsInBag", JSON.stringify(productsInBag));
       this.props.setProductsInBag(productsInBag);
-      var buttonPlus = ReactDOM.findDOMNode(this.refPlusCodeProduct.current);
       buttonPlus.removeAttribute("disabled");
 
       const productNotBagUpdated = {
