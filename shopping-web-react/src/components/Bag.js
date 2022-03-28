@@ -25,7 +25,7 @@ export default class Bag extends Component {
             </div>
             <div id="bag-products" style={{marginTop:'1em'}}>
               <React.Fragment>
-                <TotalCost productsInBag={this.props.productsInBag} setProductsInBag={this.props.setProductsInBag}></TotalCost>
+                <TotalCost productsInBag={this.props.productsInBag} setProductsInBag={this.props.setProductsInBag} setTotalPrice={this.props.setTotalPrice} setOverlay={this.props.setOverlay}></TotalCost>
               </React.Fragment>
               <React.Fragment>
                 {

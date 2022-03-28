@@ -8,7 +8,10 @@ export default class Product extends Component {
   componentDidMount() {
     var button = ReactDOM.findDOMNode(this.refProduct.current);
     var product = this.props.product;
-    button.setAttribute("codeProduct", product.codeProduct);
+    if(button !== null)
+    {
+      button.setAttribute("codeProduct", product.codeProduct);
+    }
   }
 
   addProduct = () => {

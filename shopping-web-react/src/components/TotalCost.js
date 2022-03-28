@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 
 export default class TotalCost extends Component {
+  setPopUp = () =>{
+    var totalPrice = this.getTotalPrice();
+    this.props.setOverlay(true);
+    this.props.setTotalPrice(totalPrice);
+  }
+
   getTotalPrice = () =>{
     var productsInBag = this.props.productsInBag;
     var totalPrice = 0;
@@ -15,6 +21,7 @@ export default class TotalCost extends Component {
 
   totalBuy = () => {
     var totalPrice = this.getTotalPrice();
+    localStorage.setItem("totalPrice", totalPrice);
 
     if(totalPrice === 0)
     {
@@ -49,7 +56,7 @@ export default class TotalCost extends Component {
                 <p style={{marginRight:'0.5em', marginTop:'0.5em', marginBottom:'0.5em'}}>{totalPrice} €</p>
               </div>
               <div className='col-sm-12 col-md-12 col-lg-12' style={{width:'100%'}}>
-                <button className='btn btn-primary' type='button' title='Realizar pedido' style={{width:'100%'}}>Realizar pedido</button>
+                <button className='btn btn-primary' type='button' title='Realizar pedido' onClick={this.setPopUp} style={{width:'100%'}}>Realizar pedido</button>
               </div>
             </div>
           </div>

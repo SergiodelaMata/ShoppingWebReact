@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import "./css/popup.css"
 import JsonFile from './files/test.json';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -8,6 +9,7 @@ import Navbar from './components/Navbar'
 import Title from './components/Title'
 import HomeBody from './components/HomeBody';
 import Form from './components/Form'
+import Popup from './components/Popup';
 
 export class App extends Component {
   state = {
@@ -18,7 +20,10 @@ export class App extends Component {
     categories: [],
     products: [],
     users: [],
-    productsInBag: []
+    productsInBag: [],
+    overlay: false,
+    cleanUp: 0,
+    totalPrice: 0
   }
 
   constructor(props)
@@ -39,6 +44,20 @@ export class App extends Component {
     var userEmail = sessionStorage.getItem('email');
     var userRole = sessionStorage.getItem('role');
 
+    var categories = [];
+    var products = [];
+    var users = [];
+
+    var totalPrice = localStorage.totalPrice;
+    if(totalPrice === null || totalPrice === undefined)
+    {
+      this.setTotalPrice(0);
+    }
+    else
+    {
+      this.setTotalPrice(totalPrice);
+    }
+
     if(userEmail === null || userEmail === undefined || userRole === null || userRole === undefined)
     {
       userEmail = "";
@@ -49,9 +68,9 @@ export class App extends Component {
     && localStorage.products !== "" && localStorage.products !== null && localStorage.products !== undefined
     && localStorage.users !== "" && localStorage.users !== null && localStorage.users !== undefined)
     {
-      var categories = JSON.parse(localStorage.categories);
-      var products = JSON.parse(localStorage.products);
-      var users = JSON.parse(localStorage.users);
+      categories = JSON.parse(localStorage.categories);
+      products = JSON.parse(localStorage.products);
+      users = JSON.parse(localStorage.users);
 
       var productsInBag = JSON.parse(localStorage.productsInBag);
 
@@ -72,9 +91,9 @@ export class App extends Component {
     else
     {
       const json = JSON.parse(JSON.stringify({JsonFile})).JsonFile;
-      var categories = json.categories;
-      var products = json.products;
-      var users = json.users;
+      categories = json.categories;
+      products = json.products;
+      users = json.users;
 
       localStorage.setItem('categories', JSON.stringify(categories));
       localStorage.setItem('products', JSON.stringify(products));
@@ -147,12 +166,78 @@ export class App extends Component {
     })
   }
 
+  setOverlay=(overlay)=>{
+    this.setState({
+      overlay: overlay
+    })
+  }
+
+  setCleanUp=(cleanUp)=>{
+    this.setState({
+      cleanUp: cleanUp
+    })
+  }
+
+  setTotalPrice=(totalPrice)=>{
+    this.setState({
+      totalPrice:totalPrice
+    })
+  }
+
+  removeUnits = () => {
+    localStorage.setItem('productsInBag', JSON.stringify([]));
+    this.setProductsInBag([]);
+  }
+
+
+  showPopUp = () => {
+    var totalPrice = this.state.totalPrice;
+    var overlay = this.state.overlay;
+    var cleanUp = this.state.cleanUp;
+
+    if(overlay === true)
+    {
+      return(
+        <React.Fragment>
+          <div className="overlay" id="overlay" style={{display:'flex'}}>
+            <Popup productsInBag={this.state.productsInBag} setProductsInBag={this.setProductsInBag} totalPrice={totalPrice} setOverlay={this.setOverlay} setCleanUp={this.setCleanUp}></Popup>
+          </div>
+        </React.Fragment>
+      )
+    }
+    else if(overlay !== true && cleanUp > 0)
+    {
+      this.removeUnits();
+      this.setCleanUp(0);
+      return(
+        <React.Fragment>
+          <div className="overlay" id="overlay" style={{display:'none'}}>
+            <Popup productsInBag={this.state.productsInBag} setProductsInBag={this.setProductsInBag} totalPrice={totalPrice} setOverlay={this.setOverlay} setCleanUp={this.setCleanUp}></Popup>
+          </div>
+        </React.Fragment>
+      )
+    }
+    else
+    {
+      return(
+        <React.Fragment>
+          <div className="overlay" id="overlay" style={{display:'none'}}>
+            <Popup productsInBag={this.state.productsInBag} setProductsInBag={this.setProductsInBag} totalPrice={totalPrice} setOverlay={this.setOverlay} setCleanUp={this.setCleanUp}></Popup>
+          </div>
+        </React.Fragment>
+      )
+    }
+  }
+
   contentShow = () => {
     if(this.state.page === "Home")
     {
       return(
         <React.Fragment>
-          <HomeBody categories={this.state.categories} setCategories={this.setCategories} products={this.state.products} setProducts={this.setProducts} productsInBag={this.state.productsInBag} setProductsInBag={this.setProductsInBag}></HomeBody>
+          <React.Fragment>
+            {this.showPopUp()}
+          </React.Fragment>
+          <HomeBody categories={this.state.categories} setCategories={this.setCategories} products={this.state.products} setProducts={this.setProducts} productsInBag={this.state.productsInBag} setProductsInBag={this.setProductsInBag} setTotalPrice={this.setTotalPrice} setOverlay={this.setOverlay}></HomeBody>
         </React.Fragment>
       )
     }
