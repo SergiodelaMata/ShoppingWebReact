@@ -56,7 +56,7 @@ export default class FormLogin extends Component {
 
     render() {
         return (
-            <DropdownButton  align={"start"} id="login" variant='secondary' menuVariant='dark' title='Login'>
+            <DropdownButton align={"start"} id="login" variant='secondary' menuVariant='dark' title='Login'>
                 <form id='dropdown-menu' className='form' onSubmit={this.loginSubmit}>
                     <div className='form-group container'>
                         <input ref={this.refEmail} id='emailInput' className='form-control form-control-sm' placeholder='Email' type={"text"} required></input>
