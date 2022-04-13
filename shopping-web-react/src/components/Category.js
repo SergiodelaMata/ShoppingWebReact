@@ -34,7 +34,7 @@ export default class Category extends Component {
           </button> 
         </h5>
         <div id={"products" + (this.props.category.idCategory + 1)} className='container accordion-collapse collapse show' aria-labelledby={"category" + (this.props.category.idCategory + 1)}>
-            <div id={"listProducts" + + (this.props.category.idCategory + 1)} className='row' style={{marginBottom:'0.5em'}}>
+            <div id={"listProducts" + (this.props.category.idCategory + 1)} className='row' style={{marginBottom:'0.5em'}}>
             <React.Fragment>
               {this.setProducts()}
             </React.Fragment>
