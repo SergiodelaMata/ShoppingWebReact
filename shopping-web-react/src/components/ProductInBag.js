@@ -302,7 +302,7 @@ export default class ProductInBag extends Component {
               {this.configLimitUnitsAdd()}
             </React.Fragment>
             <div className='card-body col-sm-12 col-md-6 col-lg-7'>
-              <p style={{textAlign:'center'}}>
+              <p style={{textAlign:'left'}}>
                 <strong>{productInBag.titleProduct}</strong>
               </p>
               <p className='text-muted' style={{fontSize:'0.8em', textAlign:'left'}}>

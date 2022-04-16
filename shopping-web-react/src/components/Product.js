@@ -241,10 +241,10 @@ export default class Product extends Component {
                 <button ref={this.refProduct} id={buttonProductId} className='btn btn-primary' type='button' onClick={this.addProduct} style={{width: "100%", marginBottom: "1em", fontSize: "0.8em"}} title='Añadir a la cesta'>Añadir a <br/> la cesta</button>
               </div>
               <div className='card-body col-lg-8 col-md-6 col-sm-12'>
-                <p style={{textAlign:'center'}}>
+                <p style={{textAlign:'left'}}>
                   <strong> {product.titleProduct} </strong>
                 </p>
-                <p className='text-muted' style={{textAlign:'left', fontSize:'0.8em'}}>{product.codeproduct}</p>
+                <p className='text-muted' style={{textAlign:'left', fontSize:'0.8em'}}>{product.codeProduct}</p>
                 <p style={{textAlign:'left', fontSize:'0.8em'}}>{product.description}</p>
               </div>
             </div>

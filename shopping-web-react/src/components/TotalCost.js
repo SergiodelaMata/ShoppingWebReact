@@ -30,7 +30,7 @@ export default class TotalCost extends Component {
           <div className='card'>
             <div className='row'>
               <div className='col-sm-12 col-md-6 col-lg-6'>
-                <h5 style={{marginLeft:'0.5em', marginTop:'0.5em', marginBottom:'0.5em'}}>Coste Total:</h5>
+                <h5 style={{textAlign: 'left', marginLeft:'0.5em', marginTop:'0.5em', marginBottom:'0.5em'}}>Coste Total:</h5>
               </div>
               <div className='col-sm-12 col-md-6 col-lg-6' style={{textAlign:'right'}}>
                 <p style={{marginRight:'0.5em', marginTop:'0.5em', marginBottom:'0.5em'}}>{totalPrice} €</p>
