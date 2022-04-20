@@ -3,8 +3,9 @@ Este documento sirve para poder configurar correctamente el proyecto para su cor
 Antes de realizar nada sobre el proyecto, se deben seguir los siguientes pasos por terminal:
 1. Instalar una versión de npm o instalar una versión de nvm y que ésta cuente con una versión de npm. 
     Se recomienda hacer uso de la versión 8.1.0 o una superior.
-2. Situarse en el directorio "shopping-web-react" del proyecto con el comando "cd shopping-web-react".
-3. Por seguridad instalar las dependencias de Bootstrap, Boostrap en React con los comandos "npm install bootstrap" y "npm install react-bootstrap bootstrap".
-4. Ejecutar el comando "npm start" para que se ejecute la página web local de proyecto en el puerto 3000.
+2. Realizar el comando "npm i"  sobre el directorio base del proyecto para instalar las instalar las dependencias iniciales del proyecto.
+3. Situarse en el directorio "shopping-web-react" del proyecto con el comando "cd shopping-web-react".
+4. Realizar el comando "npm i" de nuevo pero sobre el nuevo directorio para instalar las instalar las dependencias iniciales del proyecto.
+5. Ejecutar el comando "npm start" para que se ejecute la página web local de proyecto en el puerto 3000.
 
 Mientras que no se cancele el comando indicado con el comando "Ctrl + C", se podrá acceder al contenido de la página web desde cualquiera de las direcciones proporcionadas.
