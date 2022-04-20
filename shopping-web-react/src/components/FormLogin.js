@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import DropdownButton from 'react-bootstrap/esm/DropdownButton';
 import "../css/dropdown.css"
-import $ from "jquery"
 
 export default class FormLogin extends Component {
     refEmail = React.createRef();
@@ -24,7 +23,6 @@ export default class FormLogin extends Component {
         var users = this.props.users;
         
         const user = users.filter(users => users.email === inputEmail);
-        console.log(user);
 
         //Comprueba si se ha introducido un usuario existente en el listado de usuarios y si no es así, avisa al usuario
         if(user.length === 0)
